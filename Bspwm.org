@@ -1,13 +1,7 @@
 #+TITLE: Bspwm Config
-#+PROPERTY: header-args :tangle bspwmrc
+#+PROPERTY: header-args :tangle ~/.config/bspwm/bspwmrc
 
-* Bspwm Config
-
-Bspwm is a dynamically tiling X11 window manager that is written in C. Arch wiki: https://wiki.archlinux.org/title/bspwm
-
-This is the bspwm configuration of DemonKingSwarn
-My YouTube: https://youtube.com/c/SwarnadityaSinghTheGamingGuruji
-My GitHub: https://github.com/demonkingswarn
+* Bspwm
 
 #+BEGIN_SRC sh
   #!/bin/sh
