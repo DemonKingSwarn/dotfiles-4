@@ -1,0 +1,1297 @@
+#+TITLE: Desktop Config
+#+PROPERTY: header-args :mkdirp yes
+
+* Profile
+** Things
+#+begin_src sh :tangle ~/.profile
+  #!/bin/zsh
+
+  # To start x session
+  if [ "$TTY" = "/dev/tty1" ]; then
+	  printf "\033[1;32mBooting into bspwm!\033[0m\n"
+	  startx "$XDG_CONFIG_HOME/X11/xinitrc" -- -keeptty 2> /dev/null
+  fi
+
+  # to set tty's color scheme
+  if [ "$TERM" = "linux" ]; then
+	  printf %b '\e[40m' '\e[8]'
+	  printf %b '\e[37m' '\e[8]' 
+	  printf %b '\e]P0282a36'    
+	  printf %b '\e]P86272a4'    
+	  printf %b '\e]P1ff5555'    
+	  printf %b '\e]P9ff7777'    
+	  printf %b '\e]P250fa7b'    
+	  printf %b '\e]PA70fa9b'    
+	  printf %b '\e]P3f1fa8c'    
+	  printf %b '\e]PBffb86c'    
+	  printf %b '\e]P4bd93f9'    
+	  printf %b '\e]PCcfa9ff'    
+	  printf %b '\e]P5ff79c6'    
+	  printf %b '\e]PDff88e8'    
+	  printf %b '\e]P68be9fd'    
+	  printf %b '\e]PE97e2ff'
+	  printf %b '\e]P7f8f8f2'
+	  printf %b '\e]PFffffff'
+	  clear
+  fi
+
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="firefox"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+#+end_src
+
+** =$PATH=
+#+begin_src sh :tangle ~/.profile
+export PATH=/home/demonkingswarn/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/demonkingswarn/.cargo/bin:/home/demonkingswarn/.local/bin/statusbar:/home/demonkingswarn/Applications
+#+end_src
+
+* Bash
+#+begin_src bash ~/.bashrc
+eval "$(starship init bash)"
+#+end_src
+
+* Kitty
+** Basic Configuration
+#+begin_src conf :tangle ~/.config/kitty/kitty.conf
+  font_family       monospace
+  font_size 12.0
+
+  include ./dracula.conf
+#+end_src
+
+** Theme
+#+begin_src conf :tangle ~/.config/kitty/dracula.conf
+# https://draculatheme.com/kitty
+#
+# Installation instructions:
+#
+#  cp dracula.conf ~/.config/kitty/
+#  echo "include dracula.conf" >> ~/.config/kitty/kitty.conf
+#
+# Then reload kitty for the config to take affect.
+# Alternatively copy paste below directly into kitty.conf
+
+foreground            #f8f8f2
+background            #282a36
+selection_foreground  #ffffff
+selection_background  #44475a
+
+url_color #8be9fd
+
+# black
+color0  #21222c
+color8  #6272a4
+
+# red
+color1  #ff5555
+color9  #ff6e6e
+
+# green
+color2  #50fa7b
+color10 #69ff94
+
+# yellow
+color3  #f1fa8c
+color11 #ffffa5
+
+# blue
+color4  #bd93f9
+color12 #d6acff
+
+# magenta
+color5  #ff79c6
+color13 #ff92df
+
+# cyan
+color6  #8be9fd
+color14 #a4ffff
+
+# white
+color7  #f8f8f2
+color15 #ffffff
+
+# Cursor colors
+cursor            #f8f8f2
+cursor_text_color background
+
+# Tab bar colors
+active_tab_foreground   #282a36
+active_tab_background   #f8f8f2
+inactive_tab_foreground #282a36
+inactive_tab_background #6272a4
+
+# Marks
+mark1_foreground #282a36
+mark1_background #ff5555
+
+#+end_src
+
+* Polybar
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[colors]
+bg = #16161e
+bg-alt = #20212C
+fg = #acb0d0
+fg-alt = #5D5E72
+
+red = #ff7a93
+
+trans = #00000000
+semi-trans-black = #cc000000
+
+shade-1 = #32344a
+shade-2 = #444b6a
+shade-3 = #787c99
+shade-4 = #CACACE
+shade-5 = #acb0d0
+
+[bar/main]
+width = 100%
+height = 30
+offset-y = 0
+top = true
+fixed-center = true
+
+wm-restack = bspwm
+
+override-redirect = false
+
+scroll-up = next
+scroll-down = prev
+
+enable-ipc = true
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+font-0 = "JetBrains Mono Nerd Font:style=Medium:size=10;2"
+font-1 = "JetBrains Mono Nerd Font:style=Bold:size=10;2"
+font-2 = "JetBrainsMono Nerd Font:size=19;5"
+font-3 = "Noto Color Emoji:pixelsize=16:style=Regular:scale=10;2"
+
+modules-left = bspwm
+modules-right = nettraf empty-space volume empty-space clock empty-space internet
+
+tray-position = right
+tray-padding = 2
+tray-maxsize = 22
+
+cursor-click = pointer
+
+[bar/external]
+monitor = HDMI1
+modules-right = pulseaudio margin session
+inherit = bar/main
+
+[settings]
+screenchange-reload = true
+
+[module/bspwm]
+type = internal/bspwm
+
+format = <label-state> <label-mode>
+
+label-focused = %index%
+label-focused-foreground = ${colors.shade-5}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-foreground = ${colors.shade-3}
+label-occupied-padding = 2
+
+label-empty =
+label-empty-foreground = ${colors.shade-1}
+label-empty-padding = 2
+
+[module/empty-space]
+type = custom/text
+content = " | "
+
+[module/nettraf]
+type = custom/script
+interval = 1
+exec = nettraf
+format = <label>
+
+[module/volume]
+type= custom/script
+interval = 1
+exec = volume
+format = <label>
+
+[module/clock]
+type = custom/script
+interval = 1
+exec = clock
+format = <label>
+
+[module/internet]
+type = custom/script
+interval = 1
+exec = internet
+format = <label>
+
+[module/dbar]
+type = custom/script
+interval = 1
+exec = dbar
+format = <label>
+
+[module/kbselect]
+type = custom/script
+interval = 1
+exec = kbselect
+format = <label>
+
+#+end_src
+
+* Zathura
+#+begin_src conf :tangle ~/.config/zathura/zathurarc
+set window-title-basename "true"
+set selection-clipboard "clipboard"
+
+# Dracula color theme for Zathura
+# Swaps Foreground for Background to get a light version if the user prefers
+
+#
+# Dracula color theme
+#
+
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "#f8f8f2" # Foreground
+set notification-warning-bg     "#ffb86c" # Orange
+set notification-warning-fg     "#44475a" # Selection
+set notification-bg             "#282a36" # Background
+set notification-fg             "#f8f8f2" # Foreground
+
+set completion-bg               "#282a36" # Background
+set completion-fg               "#6272a4" # Comment
+set completion-group-bg         "#282a36" # Background
+set completion-group-fg         "#6272a4" # Comment
+set completion-highlight-bg     "#44475a" # Selection
+set completion-highlight-fg     "#f8f8f2" # Foreground
+
+set index-bg                    "#282a36" # Background
+set index-fg                    "#f8f8f2" # Foreground
+set index-active-bg             "#44475a" # Current Line
+set index-active-fg             "#f8f8f2" # Foreground
+
+set inputbar-bg                 "#282a36" # Background
+set inputbar-fg                 "#f8f8f2" # Foreground
+set statusbar-bg                "#282a36" # Background
+set statusbar-fg                "#f8f8f2" # Foreground
+
+set highlight-color             "#ffb86c" # Orange
+set highlight-active-color      "#ff79c6" # Pink
+
+set default-bg                  "#282a36" # Background
+set default-fg                  "#f8f8f2" # Foreground
+
+set render-loading              true
+set render-loading-fg           "#282a36" # Background
+set render-loading-bg           "#f8f8f2" # Foreground
+
+#
+# Recolor mode settings
+#
+
+set recolor-lightcolor          "#282a36" # Background
+set recolor-darkcolor           "#f8f8f2" # Foreground
+
+#
+# Startup options
+#
+set adjust-open width
+set recolor true
+
+#+end_src
+
+* Nvim
+#+begin_src vimrc :tangle ~/.config/nvim/init.vim
+" truecolor
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" Install Plugged
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Plugged
+call plug#begin(expand('~/.vim/plugged'))
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'andweeb/presence.nvim'
+call plug#end()
+
+
+" UI
+set number relativenumber
+colorscheme dracula
+set background=dark
+let g:nord_cursor_line_number_background = 1
+let g:nord_uniform_diff_background = 1
+
+" Indentation
+set tabstop=4
+set shiftwidth=4
+
+" Use the system clipboard
+set clipboard=unnamedplus
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+#+end_src
+
+* Sxhkd
+#+begin_src conf :tangle ~/.config/sxhkd/sxhkdrc
+#!/bin/sh
+
+super + Escape
+	pkill -USR1 -x sxhkd
+
+Print
+	$HOME/.scripts/misc/scrotss
+
+super + Print
+	flameshot gui
+
+F12
+	rofi -show run && rm -f ~/pix/rofi.png && scrot -F ~/pix/rofi.png && xclip -sel c -t image/png ~/pix/rofi.png
+
+super + d
+	rofi -show run
+
+alt + d
+	dmenu_run
+
+super + Return
+	st
+
+super + k
+	kitty
+
+super + w
+	$HOME/.scripts/custom_emoji/custom_emoji.sh
+
+super + e
+	$HOME/.scripts/emojis/emoji.sh
+
+super + s
+	$HOME/.scripts/scripts_menu/scripts_menu.sh
+
+super + p
+	$HOME/.scripts/misc/passmenu
+
+super + f
+	rofi -show file-browser-extended -show-icons -file-browser-hide-parent
+
+XF86AudioRaiseVolume 
+	pamixer -i 2 5%
+
+XF86AudioLowerVolume 
+	pamixer -d 2 5%
+
+XF86AudioMute 
+	pamixer -t
+
+super + shift + x
+	~/.scripts/system/lock.sh
+	#slock
+
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + {_,space + }q
+	bspc node -{c,k}
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#+end_src
+
+* Nsxiv
+#+begin_src sh :tangle ~/.config/nsxiv/exec/key-handler
+#!/bin/sh
+
+while read file
+do
+	case "$1" in 
+		"w") setbg "$file" ;;
+		"c") xclip -sel c -t image/png -i "$file" ;;
+		"r") convert "$file" -rotate 90 /tmp/out.jpg ;;
+		"m") curl -F"file=@$file" 0x0.st | xclip -sel c ;;
+	esac
+done
+
+#+end_src
+
+* Picom
+#+begin_src conf :tangle ~/.config/picom/picom.conf
+#################################
+#             Shadows           #
+#################################
+
+
+# Enabled client-side shadows on windows. Note desktop windows 
+# (windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow, 
+# unless explicitly requested using the wintypes option.
+#
+# shadow = false
+shadow = true;
+
+# The blur radius for shadows, in pixels. (defaults to 12)
+# shadow-radius = 12
+shadow-radius = 7;
+
+# The opacity of shadows. (0.0 - 1.0, defaults to 0.75)
+# shadow-opacity = .75
+
+# The left offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-x = -15
+shadow-offset-x = -7;
+
+# The top offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-y = -15
+shadow-offset-y = -7;
+
+# Avoid drawing shadows on dock/panel windows. This option is deprecated,
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dock-shadow = false
+
+# Don't draw shadows on drag-and-drop windows. This option is deprecated, 
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dnd-shadow = false
+
+# Red color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-red = 0
+
+# Green color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-green = 0
+
+# Blue color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-blue = 0
+
+# Do not paint shadows on shaped windows. Note shaped windows 
+# here means windows setting its shape through X Shape extension. 
+# Those using ARGB background is beyond our control. 
+# Deprecated, use 
+#   shadow-exclude = 'bounding_shaped'
+# or 
+#   shadow-exclude = 'bounding_shaped && !rounded_corners'
+# instead.
+#
+# shadow-ignore-shaped = ''
+
+# Specify a list of conditions of windows that should have no shadow.
+#
+# examples:
+#   shadow-exclude = "n:e:Notification";
+#
+# shadow-exclude = []
+shadow-exclude = [
+  "name = 'Notification'",
+  "class_g = 'Conky'",
+  "class_g ?= 'Notify-osd'",
+  "class_g = 'Cairo-clock'",
+  "_GTK_FRAME_EXTENTS@:c"
+];
+
+# Specify a X geometry that describes the region in which shadow should not
+# be painted in, such as a dock window region. Use 
+#    shadow-exclude-reg = "x10+0+0"
+# for example, if the 10 pixels on the bottom of the screen should not have shadows painted on.
+#
+# shadow-exclude-reg = "" 
+
+# Crop shadow of a window fully on a particular Xinerama screen to the screen.
+# xinerama-shadow-crop = false
+
+
+#################################
+#           Fading              #
+#################################
+
+
+# Fade windows in/out when opening/closing and when opacity changes,
+#  unless no-fading-openclose is used.
+# fading = false
+fading = true
+
+# Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)
+# fade-in-step = 0.028
+fade-in-step = 0.1;
+
+# Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)
+# fade-out-step = 0.03
+fade-out-step = 0.1;
+
+# The time between steps in fade step, in milliseconds. (> 0, defaults to 10)
+# fade-delta = 10
+
+# Specify a list of conditions of windows that should not be faded.
+# fade-exclude = []
+
+# Do not fade on window open/close.
+# no-fading-openclose = false
+
+# Do not fade destroyed ARGB windows with WM frame. Workaround of bugs in Openbox, Fluxbox, etc.
+# no-fading-destroyed-argb = false
+
+
+#################################
+#   Transparency / Opacity      #
+#################################
+
+
+# Opacity of inactive windows. (0.1 - 1.0, defaults to 1.0)
+# inactive-opacity = 1
+inactive-opacity = 0.975;
+
+# Opacity of window titlebars and borders. (0.1 - 1.0, disabled by default)
+# frame-opacity = 1.0
+frame-opacity = 0.7;
+
+# Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)
+# menu-opacity = 1.0
+
+# Let inactive opacity set by -i override the '_NET_WM_OPACITY' values of windows.
+# inactive-opacity-override = true
+inactive-opacity-override = true;
+
+# Default opacity for active windows. (0.0 - 1.0, defaults to 1.0)
+active-opacity = 1
+
+# Dim inactive windows. (0.0 - 1.0, defaults to 0.0)
+# inactive-dim = 0.0
+
+# Specify a list of conditions of windows that should always be considered focused.
+# focus-exclude = []
+focus-exclude = [ "class_g = 'Cairo-clock'" ];
+
+# Use fixed inactive dim value, instead of adjusting according to window opacity.
+# inactive-dim-fixed = 1.0
+
+# Specify a list of opacity rules, in the format `PERCENT:PATTERN`, 
+# like `50:name *= "Firefox"`. picom-trans is recommended over this. 
+# Note we don't make any guarantee about possible conflicts with other 
+# programs that set '_NET_WM_WINDOW_OPACITY' on frame or client windows.
+# example:
+#    opacity-rule = [ "80:class_g = 'URxvt'" ];
+#
+opacity-rule = [
+	"90:class_g = 'Rofi'",
+	"80:class_g = 'slock'",
+	"100:class_g = 'kitty'",
+	"100:class_g = 'firefox'",
+	"100:class_g = 'Emacs'"
+]
+
+
+#################################
+#     Background-Blurring       #
+#################################
+
+
+# Parameters for background blurring, see the *BLUR* section for more information.
+# blur-method = "dual_kawase";
+# blur-size = 12
+#
+# blur-deviation = false
+
+# Blur background of semi-transparent / ARGB windows. 
+# Bad in performance, with driver-dependent behavior. 
+# The name of the switch may change without prior notifications.
+#
+# blur-background = false
+
+# Blur background of windows when the window frame is not opaque. 
+# Implies:
+#    blur-background 
+# Bad in performance, with driver-dependent behavior. The name may change.
+#
+# blur-background-frame = false
+
+
+# Use fixed blur strength rather than adjusting according to window opacity.
+# blur-background-fixed = false
+
+
+# Specify the blur convolution kernel, with the following format:
+# example:
+#   blur-kern = "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1";
+#
+# blur-kern = ''
+blur-kern = "3x3box";
+
+
+# Exclude conditions for background blur.
+# blur-background-exclude = []
+blur-background-exclude = [
+  "window_type = 'dock'",
+  "window_type = 'desktop'",
+  "_GTK_FRAME_EXTENTS@:c"
+];
+
+#################################
+#       General Settings        #
+#################################
+
+# Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
+# daemon = false
+
+# Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
+# `xrender` is the default one.
+#
+backend = "glx";
+# backend = "xrender";
+
+# Enable/disable VSync.
+# vsync = false
+vsync = true
+
+# Enable remote control via D-Bus. See the *D-BUS API* section below for more details.
+# dbus = false
+
+# Try to detect WM windows (a non-override-redirect window with no 
+# child that has 'WM_STATE') and mark them as active.
+#
+mark-wmwin-focused = false
+# mark-wmwin-focused = true;
+
+# Mark override-redirect windows that doesn't have a child window with 'WM_STATE' focused.
+mark-ovredir-focused = false
+# mark-ovredir-focused = true;
+
+# Try to detect windows with rounded corners and don't consider them 
+# shaped windows. The accuracy is not very high, unfortunately.
+#
+# detect-rounded-corners = false
+detect-rounded-corners = true;
+
+# Detect '_NET_WM_OPACITY' on client windows, useful for window managers
+# not passing '_NET_WM_OPACITY' of client windows to frame windows.
+#
+# detect-client-opacity = false
+detect-client-opacity = true;
+
+# Specify refresh rate of the screen. If not specified or 0, picom will 
+# try detecting this with X RandR extension.
+#
+# refresh-rate = 60
+refresh-rate = 0
+
+# Limit picom to repaint at most once every 1 / 'refresh_rate' second to 
+# boost performance. This should not be used with 
+#   vsync drm/opengl/opengl-oml
+# as they essentially does sw-opti's job already, 
+# unless you wish to specify a lower refresh rate than the actual value.
+#
+# sw-opti = 
+
+# Use EWMH '_NET_ACTIVE_WINDOW' to determine currently focused window, 
+# rather than listening to 'FocusIn'/'FocusOut' event. Might have more accuracy, 
+# provided that the WM supports it.
+#
+use-ewmh-active-win = true 
+
+# Unredirect all windows if a full-screen opaque window is detected, 
+# to maximize performance for full-screen windows. Known to cause flickering 
+# when redirecting/unredirecting windows.
+#
+# unredir-if-possible = false
+
+# Delay before unredirecting the window, in milliseconds. Defaults to 0.
+# unredir-if-possible-delay = 0
+
+# Conditions of windows that shouldn't be considered full-screen for unredirecting screen.
+# unredir-if-possible-exclude = []
+
+# Use 'WM_TRANSIENT_FOR' to group windows, and consider windows 
+# in the same group focused at the same time.
+#
+# detect-transient = false
+detect-transient = true
+
+# Use 'WM_CLIENT_LEADER' to group windows, and consider windows in the same 
+# group focused at the same time. 'WM_TRANSIENT_FOR' has higher priority if 
+# detect-transient is enabled, too.
+#
+# detect-client-leader = false
+detect-client-leader = true
+
+# Resize damaged region by a specific number of pixels. 
+# A positive value enlarges it while a negative one shrinks it. 
+# If the value is positive, those additional pixels will not be actually painted 
+# to screen, only used in blur calculation, and such. (Due to technical limitations, 
+# with use-damage, those pixels will still be incorrectly painted to screen.) 
+# Primarily used to fix the line corruption issues of blur, 
+# in which case you should use the blur radius value here 
+# (e.g. with a 3x3 kernel, you should use `--resize-damage 1`, 
+# with a 5x5 one you use `--resize-damage 2`, and so on). 
+# May or may not work with *--glx-no-stencil*. Shrinking doesn't function correctly.
+#
+# resize-damage = 1
+
+# Specify a list of conditions of windows that should be painted with inverted color. 
+# Resource-hogging, and is not well tested.
+#
+# invert-color-include = []
+
+# GLX backend: Avoid using stencil buffer, useful if you don't have a stencil buffer. 
+# Might cause incorrect opacity when rendering transparent content (but never 
+# practically happened) and may not work with blur-background. 
+# My tests show a 15% performance boost. Recommended.
+#
+# glx-no-stencil = false
+
+# GLX backend: Avoid rebinding pixmap on window damage. 
+# Probably could improve performance on rapid window content changes, 
+# but is known to break things on some drivers (LLVMpipe, xf86-video-intel, etc.).
+# Recommended if it works.
+#
+# glx-no-rebind-pixmap = false
+
+# Disable the use of damage information. 
+# This cause the whole screen to be redrawn everytime, instead of the part of the screen
+# has actually changed. Potentially degrades the performance, but might fix some artifacts.
+# The opposing option is use-damage
+#
+# no-use-damage = false
+use-damage = true
+
+# Use X Sync fence to sync clients' draw calls, to make sure all draw 
+# calls are finished before picom starts drawing. Needed on nvidia-drivers 
+# with GLX backend for some users.
+#
+# xrender-sync-fence = false
+
+# GLX backend: Use specified GLSL fragment shader for rendering window contents. 
+# See `compton-default-fshader-win.glsl` and `compton-fake-transparency-fshader-win.glsl` 
+# in the source tree for examples.
+#
+# glx-fshader-win = ''
+
+# Force all windows to be painted with blending. Useful if you 
+# have a glx-fshader-win that could turn opaque pixels transparent.
+#
+# force-win-blend = false
+
+# Do not use EWMH to detect fullscreen windows. 
+# Reverts to checking if a window is fullscreen based only on its size and coordinates.
+#
+# no-ewmh-fullscreen = false
+
+# Dimming bright windows so their brightness doesn't exceed this set value. 
+# Brightness of a window is estimated by averaging all pixels in the window, 
+# so this could comes with a performance hit. 
+# Setting this to 1.0 disables this behaviour. Requires --use-damage to be disabled. (default: 1.0)
+#
+# max-brightness = 1.0
+
+# Make transparent windows clip other windows like non-transparent windows do,
+# instead of blending on top of them.
+#
+# transparent-clipping = false
+
+# Set the log level. Possible values are:
+#  "trace", "debug", "info", "warn", "error"
+# in increasing level of importance. Case doesn't matter. 
+# If using the "TRACE" log level, it's better to log into a file 
+# using *--log-file*, since it can generate a huge stream of logs.
+#
+# log-level = "debug"
+log-level = "warn";
+
+# Set the log file.
+# If *--log-file* is never specified, logs will be written to stderr. 
+# Otherwise, logs will to written to the given file, though some of the early 
+# logs might still be written to the stderr. 
+# When setting this option from the config file, it is recommended to use an absolute path.
+#
+# log-file = '/path/to/your/log/file'
+
+# Show all X errors (for debugging)
+# show-all-xerrors = false
+
+# Write process ID to a file.
+# write-pid-path = '/path/to/your/log/file'
+
+# Window type settings
+# 
+# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard: 
+#     "unknown", "desktop", "dock", "toolbar", "menu", "utility", 
+#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu", 
+#     "tooltip", "notification", "combo", and "dnd".
+# 
+# Following per window-type options are available: ::
+# 
+#   fade, shadow:::
+#     Controls window-type-specific shadow and fade settings.
+# 
+#   opacity:::
+#     Controls default opacity of the window type.
+# 
+#   focus:::
+#     Controls whether the window of this type is to be always considered focused. 
+#     (By default, all window types except "normal" and "dialog" has this on.)
+# 
+#   full-shadow:::
+#     Controls whether shadow is drawn under the parts of the window that you 
+#     normally won't be able to see. Useful when the window has parts of it 
+#     transparent, and you want shadows in those areas.
+# 
+#   redir-ignore:::
+#     Controls whether this type of windows should cause screen to become 
+#     redirected again after been unredirected. If you have unredir-if-possible
+#     set, and doesn't want certain window to cause unnecessary screen redirection, 
+#     you can set this to `true`.
+#
+wintypes:
+{
+  tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
+  dock = { shadow = false; }
+  dnd = { shadow = false; }
+  popup_menu = { opacity = 0.8; }
+  dropdown_menu = { opacity = 0.8; }
+};
+
+#+end_src
+
+* Rofi
+** Basic Configuration
+#+begin_src css :tangle ~/.config/rofi/config.rasi
+configuration {
+	modi: "run,ssh,file-browser-extended";
+	font: "monospace 12";
+	location: 2;
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+/*	show-icons: false;*/
+	terminal: "kitty";
+/*	ssh-client: "ssh";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
+/*	run-command: "{cmd}";*/
+/*	run-list-command: "";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	window-match-fields: "all";*/
+/*	icon-theme: ;*/
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
+/*	drun-show-actions: false;*/
+/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-url-launcher: "xdg-open";*/
+/*	disable-history: false;*/
+/*	ignored-prefixes: "";*/
+/*	sort: false;*/
+/*	sorting-method: "normal";*/
+/*	case-sensitive: false;*/
+/*	cycle: true;*/
+/*	sidebar-mode: false;*/
+/*	hover-select: false;*/
+/*	eh: 1;*/
+/*	auto-select: false;*/
+/*	parse-hosts: false;*/
+/*	parse-known-hosts: true;*/
+/*	combi-modi: "window,run";*/
+/*	matching: "normal";*/
+/*	tokenize: true;*/
+/*	m: "-5";*/
+/*	filter: ;*/
+/*	dpi: -1;*/
+/*	threads: 0;*/
+/*	scroll-method: 0;*/
+/*	window-format: "{w}    {c}   {t}";*/
+/*	click-to-exit: true;*/
+/*	max-history-size: 25;*/
+/*	combi-hide-mode-prefix: false;*/
+/*	matching-negate-char: '-' /* unsupported */;*/
+/*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
+/*	normalize-match: false;*/
+/*	steal-focus: false;*/
+/*	application-fallback-icon: ;*/
+/*	pid: "/run/user/1000/rofi.pid";*/
+/*	display-window: ;*/
+/*	display-windowcd: ;*/
+/*	display-run: ;*/
+/*	display-ssh: ;*/
+/*	display-drun: ;*/
+/*	display-combi: ;*/
+/*	display-keys: ;*/
+/*	display-filebrowser: ;*/
+/*	display-file-browser-extended: ;*/
+/*	kb-primary-paste: "Control+V,Shift+Insert";*/
+/*	kb-secondary-paste: "Control+v,Insert";*/
+/*	kb-clear-line: "Control+w";*/
+/*	kb-move-front: "Control+a";*/
+/*	kb-move-end: "Control+e";*/
+/*	kb-move-word-back: "Alt+b,Control+Left";*/
+/*	kb-move-word-forward: "Alt+f,Control+Right";*/
+/*	kb-move-char-back: "Left,Control+b";*/
+/*	kb-move-char-forward: "Right,Control+f";*/
+/*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
+/*	kb-remove-word-forward: "Control+Alt+d";*/
+/*	kb-remove-char-forward: "Delete,Control+d";*/
+	kb-remove-char-back: "BackSpace";
+	kb-remove-to-eol: "Control+Shift+e";
+/*	kb-remove-to-sol: "Control+u";*/
+	kb-accept-entry: "Control+m,Return,KP_Enter";
+/*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
+/*	kb-accept-alt: "Shift+Return";*/
+/*	kb-delete-entry: "Shift+Delete";*/
+	kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+	kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+	kb-mode-complete: "Control+p";
+/*	kb-row-left: "Control+Page_Up";*/
+/*	kb-row-right: "Control+Page_Down";*/
+	kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+	kb-row-down: "Down,Control+j";
+/*	kb-row-tab: "Tab";*/
+/*	kb-page-prev: "Page_Up";*/
+/*	kb-page-next: "Page_Down";*/
+/*	kb-row-first: "Home,KP_Home";*/
+/*	kb-row-last: "End,KP_End";*/
+/*	kb-row-select: "Control+space";*/
+	kb-screenshot: "Alt+S";
+/*	kb-ellipsize: "Alt+period";*/
+/*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
+/*	kb-toggle-sort: "Alt+grave";*/
+/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
+/*	kb-custom-1: "Alt+1";*/
+/*	kb-custom-2: "Alt+2";*/
+/*	kb-custom-3: "Alt+3";*/
+/*	kb-custom-4: "Alt+4";*/
+/*	kb-custom-5: "Alt+5";*/
+/*	kb-custom-6: "Alt+6";*/
+/*	kb-custom-7: "Alt+7";*/
+/*	kb-custom-8: "Alt+8";*/
+/*	kb-custom-9: "Alt+9";*/
+/*	kb-custom-10: "Alt+0";*/
+/*	kb-custom-11: "Alt+exclam";*/
+/*	kb-custom-12: "Alt+at";*/
+/*	kb-custom-13: "Alt+numbersign";*/
+/*	kb-custom-14: "Alt+dollar";*/
+/*	kb-custom-15: "Alt+percent";*/
+/*	kb-custom-16: "Alt+dead_circumflex";*/
+/*	kb-custom-17: "Alt+ampersand";*/
+/*	kb-custom-18: "Alt+asterisk";*/
+/*	kb-custom-19: "Alt+parenleft";*/
+/*	kb-select-1: "Super+1";*/
+/*	kb-select-2: "Super+2";*/
+/*	kb-select-3: "Super+3";*/
+/*	kb-select-4: "Super+4";*/
+/*	kb-select-5: "Super+5";*/
+/*	kb-select-6: "Super+6";*/
+/*	kb-select-7: "Super+7";*/
+/*	kb-select-8: "Super+8";*/
+/*	kb-select-9: "Super+9";*/
+/*	kb-select-10: "Super+0";*/
+/*	ml-row-left: "ScrollLeft";*/
+/*	ml-row-right: "ScrollRight";*/
+/*	ml-row-up: "ScrollUp";*/
+/*	ml-row-down: "ScrollDown";*/
+/*	me-select-entry: "MousePrimary";*/
+/*	me-accept-entry: "MouseDPrimary";*/
+/*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+
+@theme "~/.config/rofi/palenight.rasi"
+
+#+end_src
+
+** Theme
+#+begin_src css :tangle ~/.config/rofi/palenight.rasi
+* {
+	palenight1: #292D3E;
+	palenight2: #242837;
+	palenight3: #A6Accd;
+	palenight4: #82aaff;
+	palenight5: #89DDFF;
+	palenight6: #ff5370;
+	spacing: 2;
+	background-color: var(palenight1);
+	background: var(palenight1);
+	foreground: var(palenight3);
+	normal-background: var(background);
+	normal-foreground: var(foreground);
+	alternate-normal-background: var(background);
+	alternate-normal-foreground: var(foreground);
+	selected-normal-background: var(palenight4);
+	selected-normal-foreground: var(background);
+	active-background: var(background);
+	active-foreground: var(palenight5);
+	alternate-active-background: var(background);
+	alternate-active-foreground: var(palenight5);
+	selected-active-background: var(palenight5);
+	selected-active-foreground: var(background);
+	urgent-background: var(background);
+	urgent-foreground: var(palenight6);
+	alternate-urgent-background: var(background);
+	alternate-urgent-foreground: var(palenight6);
+	selected-urgent-background: var(palenight6);
+	selected-urgent-foreground: var(background);
+}
+
+element {
+	padding: 0px 0px 0px 7px;
+	spacing: 5px;
+	border: 0;
+	cursor: pointer;
+}
+
+element normal.normal {
+	background-color: var(normal-background);
+	text-color: var(normal-foreground);
+}
+
+element normal.urgent {
+	background-color: var(urgent-background);
+	text-color: var(urgent-foreground);
+}
+
+element normal.active {
+	background-color: var(active-background);
+	text-color: var(active-foreground);
+}
+
+element selected.normal {
+	background-color: var(selected-normal-background);
+	text-color: var(selected-normal-foreground);
+}
+
+element selected.urgent {
+	background-color: var(selected-urgent-background);
+	text-color: var(selected-urgent-foreground);
+}
+
+element selected.active {
+	background-color: var(selected-active-background);
+	text-color: var(selected-active-foreground);
+}
+
+element alternate.normal {
+	background-color: var(alternate-normal-background);
+	text-color: var(alternate-normal-foreground);
+}
+
+element alternate.urgent {
+	background-color: var(alternate-urgent-background);
+	text-color: var(alternate-urgent-foreground);
+}
+
+element alternate.active {
+	background-color: var(alternate-active-background);
+	text-color: var(alternate-active-foreground);
+}
+
+element-text {
+	background-color: rgba(0, 0, 0, 0%);
+	text-color: inherit;
+	highlight: italic;
+	cursor: inherit;
+}
+
+element-icon {
+	background-color: rgba(0, 0, 0, 0%);
+	size: 1.5em;
+	text-color: inherit;
+	cursor: inherit;
+}
+
+window {
+	padding: 0;
+	border: 0;
+	background-color: var(background);
+	width: 25%;
+	height: 50%;
+}
+
+mainbox {
+	padding: 0;
+	border: 0;
+}
+
+message {
+	margin: 0px 7px;
+}
+
+textbox {
+	text-color: var(foreground);
+}
+
+listview {
+	margin: 0px 0px 5px;
+	scrollbar: true;
+	spacing: 2px;
+	fixed-height: 0;
+}
+
+scrollbar {
+	padding: 0;
+	handle-width: 14px;
+	border: 0;
+	handle-color: var(palenight2);
+}
+
+button {
+	spacing: 0;
+	text-color: var(normal-foreground);
+	cursor: pointer;
+}
+
+button selected {
+	background-color: var(selected-normal-background);
+	text-color: var(selected-normal-foreground);
+}
+
+inputbar {
+	padding: 7px;
+	margin: 7px;
+	spacing: 0;
+	text-color: var(normal-foreground);
+	background-color: var(palenight2);
+	children: [ entry ];
+}
+
+entry {
+	spacing: 0;
+	cursor: text;
+	text-color: var(normal-foreground);
+	background-color: var(palenight2);
+}
+
+#+end_src
+
+** File Browser Extended
+=rofi-file-browser-extended= will show a warning if this file doesn't exist.
+#+begin_src fundamental :tangle ~/.config/rofi/file-browser
+#+end_src
+
