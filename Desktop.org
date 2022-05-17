@@ -51,7 +51,7 @@ export PATH=/home/demonkingswarn/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/
 #+end_src
 
 * Bash
-#+begin_src bash ~/.bashrc
+#+begin_src bash :tangle ~/.bashrc
 eval "$(starship init bash)"
 #+end_src
 
