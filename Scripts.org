@@ -285,3 +285,27 @@ fi
 printf "%s%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)" "$(sed "s/.*/🔒/" /sys/class/net/tun*/operstate 2>/dev/null)"
 
 #+end_src
+
+* Notification Sound
+** Basic Script
+#+begin_src sh :tangle ~/.config/dunst/notif.sh
+#!/usr/bin/env sh
+
+paplay "$HOME/.config/dunst/notif.ogg"
+#+end_src
+
+** Sound
+#+begin_src python :tangle ~/.config/dunst/check.py
+#!/usr/bin/env python3
+
+import os
+
+url = "https://github.com/DemonKingSwarn/dotfiles-3/raw/main/.config/dunst/notif.ogg"
+
+if os.listdir()[0] == 'notif.ogg':
+    print("notif.ogg is there!")
+else:
+    print("downloading notif.ogg...")
+    os.system(f"wget {url}")
+
+#+end_src
