@@ -230,73 +230,40 @@ alias garbage="paru -Rs $(paru -Qqtd) --noconfirm"
 
   background_opacity 0.8
 
-  include ./dracula.conf
+  include ./palenight.conf
 #+end_src
 
 ** Theme
-#+begin_src conf :tangle ~/.config/kitty/dracula.conf
-# https://draculatheme.com/kitty
-#
-# Installation instructions:
-#
-#  cp dracula.conf ~/.config/kitty/
-#  echo "include dracula.conf" >> ~/.config/kitty/kitty.conf
-#
-# Then reload kitty for the config to take affect.
-# Alternatively copy paste below directly into kitty.conf
+#+begin_src conf :tangle ~/.config/kitty/palenight.conf
+foreground            #959dcb
+background            #292d3e
+selection_foreground  #eceef0
+selection_background  #607c8b
+url_color             #82aaff
 
-foreground            #f8f8f2
-background            #282a36
-selection_foreground  #ffffff
-selection_background  #44475a
+color0   #434759
+color8   #434758
 
-url_color #8be9fd
+color1   #f07178
+color9   #ff8b92
 
-# black
-color0  #21222c
-color8  #6272a4
+color2   #c3e88d
+color10  #ddffa7
 
-# red
-color1  #ff5555
-color9  #ff6e6e
+color3   #ffcb6b
+color11  #ffe585
 
-# green
-color2  #50fa7b
-color10 #69ff94
+color4  #82aaff
+color12 #9cc4ff
 
-# yellow
-color3  #f1fa8c
-color11 #ffffa5
+color5   #c792ea
+color13  #e1acff
 
-# blue
-color4  #bd93f9
-color12 #d6acff
+color6   #89ddff
+color14  #a3f7ff
 
-# magenta
-color5  #ff79c6
-color13 #ff92df
-
-# cyan
-color6  #8be9fd
-color14 #a4ffff
-
-# white
-color7  #f8f8f2
-color15 #ffffff
-
-# Cursor colors
-cursor            #f8f8f2
-cursor_text_color background
-
-# Tab bar colors
-active_tab_foreground   #282a36
-active_tab_background   #f8f8f2
-inactive_tab_foreground #282a36
-inactive_tab_background #6272a4
-
-# Marks
-mark1_foreground #282a36
-mark1_background #ff5555
+color7   #d0d0d0
+color15  #fefefe
 
 #+end_src
 
@@ -1148,140 +1115,15 @@ configuration {
 	modi: "run,ssh,file-browser-extended";
 	font: "monospace 12";
 	location: 2;
-/*	yoffset: 0;*/
-/*	xoffset: 0;*/
-/*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
 	terminal: "kitty";
-/*	ssh-client: "ssh";*/
-/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
-/*	run-command: "{cmd}";*/
-/*	run-list-command: "";*/
-/*	run-shell-command: "{terminal} -e {cmd}";*/
-/*	window-command: "wmctrl -i -R {window}";*/
-/*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
-/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
-/*	drun-categories: ;*/
-/*	drun-show-actions: false;*/
-/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
-/*	drun-url-launcher: "xdg-open";*/
-/*	disable-history: false;*/
-/*	ignored-prefixes: "";*/
-/*	sort: false;*/
-/*	sorting-method: "normal";*/
-/*	case-sensitive: false;*/
-/*	cycle: true;*/
-/*	sidebar-mode: false;*/
-/*	hover-select: false;*/
-/*	eh: 1;*/
-/*	auto-select: false;*/
-/*	parse-hosts: false;*/
-/*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
-/*	matching: "normal";*/
-/*	tokenize: true;*/
-/*	m: "-5";*/
-/*	filter: ;*/
-/*	dpi: -1;*/
-/*	threads: 0;*/
-/*	scroll-method: 0;*/
-/*	window-format: "{w}    {c}   {t}";*/
-/*	click-to-exit: true;*/
-/*	max-history-size: 25;*/
-/*	combi-hide-mode-prefix: false;*/
-/*	matching-negate-char: '-' /* unsupported */;*/
-/*	cache-dir: ;*/
-/*	window-thumbnail: false;*/
-/*	drun-use-desktop-cache: false;*/
-/*	drun-reload-desktop-cache: false;*/
-/*	normalize-match: false;*/
-/*	steal-focus: false;*/
-/*	application-fallback-icon: ;*/
-/*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
-/*	display-windowcd: ;*/
-/*	display-run: ;*/
-/*	display-ssh: ;*/
-/*	display-drun: ;*/
-/*	display-combi: ;*/
-/*	display-keys: ;*/
-/*	display-filebrowser: ;*/
-/*	display-file-browser-extended: ;*/
-/*	kb-primary-paste: "Control+V,Shift+Insert";*/
-/*	kb-secondary-paste: "Control+v,Insert";*/
-/*	kb-clear-line: "Control+w";*/
-/*	kb-move-front: "Control+a";*/
-/*	kb-move-end: "Control+e";*/
-/*	kb-move-word-back: "Alt+b,Control+Left";*/
-/*	kb-move-word-forward: "Alt+f,Control+Right";*/
-/*	kb-move-char-back: "Left,Control+b";*/
-/*	kb-move-char-forward: "Right,Control+f";*/
-/*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
-/*	kb-remove-word-forward: "Control+Alt+d";*/
-/*	kb-remove-char-forward: "Delete,Control+d";*/
 	kb-remove-char-back: "BackSpace";
 	kb-remove-to-eol: "Control+Shift+e";
-/*	kb-remove-to-sol: "Control+u";*/
 	kb-accept-entry: "Control+m,Return,KP_Enter";
-/*	kb-accept-custom: "Control+Return";*/
-/*	kb-accept-custom-alt: "Control+Shift+Return";*/
-/*	kb-accept-alt: "Shift+Return";*/
-/*	kb-delete-entry: "Shift+Delete";*/
 	kb-mode-next: "Shift+Right,Control+Tab,Control+l";
 	kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
 	kb-mode-complete: "Control+p";
-/*	kb-row-left: "Control+Page_Up";*/
-/*	kb-row-right: "Control+Page_Down";*/
 	kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
 	kb-row-down: "Down,Control+j";
-/*	kb-row-tab: "Tab";*/
-/*	kb-page-prev: "Page_Up";*/
-/*	kb-page-next: "Page_Down";*/
-/*	kb-row-first: "Home,KP_Home";*/
-/*	kb-row-last: "End,KP_End";*/
-/*	kb-row-select: "Control+space";*/
-	kb-screenshot: "Alt+S";
-/*	kb-ellipsize: "Alt+period";*/
-/*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
-/*	kb-toggle-sort: "Alt+grave";*/
-/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
-/*	kb-custom-1: "Alt+1";*/
-/*	kb-custom-2: "Alt+2";*/
-/*	kb-custom-3: "Alt+3";*/
-/*	kb-custom-4: "Alt+4";*/
-/*	kb-custom-5: "Alt+5";*/
-/*	kb-custom-6: "Alt+6";*/
-/*	kb-custom-7: "Alt+7";*/
-/*	kb-custom-8: "Alt+8";*/
-/*	kb-custom-9: "Alt+9";*/
-/*	kb-custom-10: "Alt+0";*/
-/*	kb-custom-11: "Alt+exclam";*/
-/*	kb-custom-12: "Alt+at";*/
-/*	kb-custom-13: "Alt+numbersign";*/
-/*	kb-custom-14: "Alt+dollar";*/
-/*	kb-custom-15: "Alt+percent";*/
-/*	kb-custom-16: "Alt+dead_circumflex";*/
-/*	kb-custom-17: "Alt+ampersand";*/
-/*	kb-custom-18: "Alt+asterisk";*/
-/*	kb-custom-19: "Alt+parenleft";*/
-/*	kb-select-1: "Super+1";*/
-/*	kb-select-2: "Super+2";*/
-/*	kb-select-3: "Super+3";*/
-/*	kb-select-4: "Super+4";*/
-/*	kb-select-5: "Super+5";*/
-/*	kb-select-6: "Super+6";*/
-/*	kb-select-7: "Super+7";*/
-/*	kb-select-8: "Super+8";*/
-/*	kb-select-9: "Super+9";*/
-/*	kb-select-10: "Super+0";*/
-/*	ml-row-left: "ScrollLeft";*/
-/*	ml-row-right: "ScrollRight";*/
-/*	ml-row-up: "ScrollUp";*/
-/*	ml-row-down: "ScrollDown";*/
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
-/*	me-accept-custom: "Control+MouseDPrimary";*/
   timeout {
       action: "kb-cancel";
       delay:  0;
@@ -1298,7 +1140,7 @@ configuration {
 
 ** Theme
 #+begin_src css :tangle ~/.config/rofi/palenight.rasi
-* {
+,* {
 	palenight1: #292D3E;
 	palenight2: #242837;
 	palenight3: #A6Accd;
@@ -1464,3 +1306,366 @@ entry {
 #+begin_src fundamental :tangle ~/.config/rofi/file-browser
 #+end_src
 
+* Dunst
+#+begin_src conf :tangle ~/.config/dunst/dunstrc
+[global]
+    frame_width = 2
+    font = Iosevka 11.5
+    show_indicators = no
+    history_length = 500
+    alignment = center
+
+  [urgency_normal]
+    background = "#282a36"
+    foreground = "#6272a4"
+    timeout = 5
+    default_icon = /home/demonkingswarn/.config/dunst/normal.png
+
+[mocp]
+    summary = "🎵 Now playing 🎵"
+    new_icon = /home/demonkingswarn/.config/dunst/music.png
+    set_stack_tag = true
+
+[ani-dmenu]
+    summary = "😔 Exiting.... 🔴"
+    new_icon = /home/demonkingswarn/.config/dunst/ani-dmenu.png
+
+[scrot]
+    summary = "🖼️ Scrot 🖼️"
+    new_icon = /home/demonkingswarn/.config/dunst/image.png
+
+[flameshot]
+	summary = "Flameshot Info"
+	new_icon = /home/demonkingswarn/.config/dunst/image.png
+
+[blueman]
+    appname = blueman
+    new_icon = /home/demonkingswarn/.config/dunst/bluetooth.png
+
+[discord]
+    appname = discord
+    set_stack_tag = false
+    timeout = 10
+
+# vim: ft=cfg
+[play_sound]
+	summary = "*"
+    script = "~/.config/dunst/notif.sh"
+
+#+end_src
+
+* Starship
+#+begin_src conf-toml :tangle ~/.config/starship.toml
+# Don't print a new line at the start of the prompt
+add_newline = true
+
+# Make prompt a single line instead of two lines
+[line_break]
+disabled = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+#[character]                         # The name of the module we are configuring is "character"
+#success_symbol = "[➜](bold green)"  # The "success_symbol" is set to "➜" with color "bold green"
+
+# Use custom format
+#format = """
+#[┌───────────────────>](bold green)
+#[│](bold green)$directory$rust$package
+#[└─>](bold green) """
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[aws]
+style = "bold #ffb86c"
+
+[character]
+error_symbol = "[❯](bold #ff5555)"
+success_symbol = "[❯](bold #50fa7b)"
+
+[cmd_duration]
+style = "bold #f1fa8c"
+
+[directory]
+style = "bold #50fa7b"
+
+[git_branch]
+style = "bold #ff79c6"
+
+[git_status]
+style = "bold #ff5555"
+
+[hostname]
+style = "bold #bd93f9"
+
+
+[username]
+format = "[$user]($style) on "
+style_user = "bold #8be9fd"
+
+#+end_src
+
+* Git
+#+begin_src conf-toml :tangle ~/.gitconfig
+  [user]
+	  email = rockingswarn@gmail.com
+	  name = DemonKingSwarn
+  [init]
+	  defaultBranch = main
+  [alias]
+	  cmp = "!f() { git add . && git commit -m \"$@\" && git push; }; f"
+
+  [filter "lfs"]
+	  clean = git-lfs clean -- %f
+	  smudge = git-lfs smudge -- %f
+	  process = git-lfs filter-process
+	  required = true
+  [http]
+	  sslverify = false
+  [sendmail]
+	smtpserver = localhost
+	smtpuser = demonkingswarn
+	smtpencryption = none
+	smtpserverport = 1025
+	smtpsslcertpath = ""
+#+end_src
+
+* Ferdium
+** Discord
+*** Base Dracula Theme
+#+begin_src css :tangle ~/.config/Ferdium/recipes/discord/user.css
+:root {
+  /* Dracula Base Colors */
+  --dracula-background: #282a36 !important;
+  --dracula-current-line: #44475a !important;
+  --dracula-selection: #44475a !important;
+  --dracula-foreground: #f8f8f2 !important;
+  --dracula-comment: #6272a4 !important;
+  --dracula-cyan: #8be9fd !important;
+  --dracula-green: #50fa7b !important;
+  --dracula-orange: #ffb86c !important;
+  --dracula-pink: #ff79c6 !important;
+  --dracula-purple: #bd93f9 !important;
+  --dracula-red: #ff5555 !important;
+  --dracula-yellow: #f1fa8c !important;
+  /* Dracula ANSI Colors */
+  --dracula-color0: #21222c !important;
+  --dracula-color1: #ff5555 !important;
+  --dracula-color2: #50fa7b !important;
+  --dracula-color3: #f1fa8c !important;
+  --dracula-color4: #f1fa8c !important;
+  --dracula-color5: #ff79c6 !important;
+  --dracula-color6: #8be9fd !important;
+  --dracula-color7: #f8f8f2 !important;
+  --dracula-color8: #6272a4 !important;
+  --dracula-color9: #ff6e6e !important;
+  --dracula-color10: #69ff94 !important;
+  --dracula-color11: #ffffa5 !important;
+  --dracula-color12: #d6acff !important;
+  --dracula-color13: #ff92df !important;
+  --dracula-color14: #a4ffff !important;
+  --dracula-color15: #ffffff !important;
+  /* Dracula Other Colors */
+  --dracula-line-highlight: #44475a75 !important;
+  --dracula-non-text: #ffffff1a !important;
+  --dracula-white: #ffffff !important;
+  --dracula-tab-drop-background: #44475a70 !important;
+  --dracula-background-lighter: #424450;
+  --dracula-background-alt: #343746 !important;
+
+  /* Discord Root Colors */
+  --header-primary: var(--dracula-foreground) !important;
+  --background-primary: var(--dracula-background) !important;
+  --background-secondary: var(--dracula-background) !important;
+  --background-mobile-primary: var(--dracula-background) !important;
+  --background-mobile-secondary: var(--dracula-background) !important;
+  --background-secondary-alt: var(--dracula-background) !important;
+  --background-tertiary: var(--dracula-background-alt) !important;
+  --background-accent: var(--dracula-current-line) !important;
+  --background-floating: var(--dracula-background) !important;
+  --background-modifier-selected: var(--dracula-current-line) !important;
+  --activity-card-background: var(--dracula-background) !important;
+  --interactive-normal: var(--dracula-foreground) !important;
+  --channeltextarea-background: var(--dracula-selection) !important;
+  --rs-online-color: var(--dracula-green) !important;
+  --rs-idle-color: var(--dracula-orange) !important;
+  --rs-dnd-color: var(--dracula-red) !important;
+  --rs-offline-color: var(--dracula-selection) !important;
+  --rs-streaming-color: var(--dracula-purple) !important;
+  --rs-invisible-color: var(--dracula-comment) !important;
+  --interactive-muted: var(--dracula-comment) !important;
+  --scrollbar-auto-thumb: var(--dracula-comment) !important;
+  --scrollbar-auto-track: var(--dracula-background-alt) !important;
+  --scrollbar-thin-thumb: var(--dracula-comment) !important;
+  --scrollbar-auto-scrollbar-color-thumb: var(--dracula-comment) !important;
+  --scrollbar-auto-scrollbar-color-track: var(
+    --dracula-background-alt
+  ) !important;
+}
+
+.wrapper-1BJsBx.selected-bZ3Lue .childWrapper-anI2G9,
+.wrapper-1BJsBx:hover .childWrapper-anI2G9 {
+  background-color: var(--dracula-comment) !important;
+}
+
+/* Home */
+.container-2cd8Mz {
+  background-color: var(--dracula-background) !important;
+}
+
+/* Autocomplete popup */
+.autocomplete-3NRXG8 {
+  background-color: var(--dracula-background) !important;
+}
+
+.autocomplete-3jLKbj {
+  background-color: var(--dracula-background) !important;
+}
+
+/* Autocomplete popup selection */
+.selected-3H3-RC {
+  background-color: var(--dracula-selection) !important;
+}
+
+/* Scroll Bar */
+.theme-dark
+  .scrollerThemed-2oenus.themedWithTrack-q8E3vB
+  .scroller-2FKFPG::-webkit-scrollbar-track-piece {
+  background-color: var(--dracula-selection) !important;
+  border: 4px solid var(--dracula-background) !important;
+  border-radius: 8px !important;
+}
+/* Outlines */
+.scroller-kQBbkU,
+.form-3gdLxP,
+.members-3WRCEx,
+.scroller-1ox3I2,
+.panels-3wFtMD,
+.scroller-3X7KbA,
+.container-ZMc96U.themed-Hp1KC_,
+.header-3OsQeK,
+.searchBar-zdmu7v,
+.scroller-2LSbBU,
+.searchBar-3TnChZ,
+.peopleColumn-1wMU14,
+.container-3u6dG-,
+.scroller-9moviB,
+.nowPlayingColumn-1eCBCN,
+.header-2V-4Sw,
+.contentRegion-3HkfJJ {
+  border-color: var(--dracula-current-line) !important;
+  border-style: solid !important;
+}
+
+/* Settings Content Pane */
+.contentRegion-3HkfJJ {
+  border-width: 0 0 0 1px !important;
+}
+/* Chat */
+.scroller-kQBbkU {
+  border-width: 1px 1px 0 1px !important;
+}
+/* Message Box */
+.form-3gdLxP {
+  border-width: 0 1px 1px !important;
+}
+/* Member List */
+.members-3WRCEx {
+  border-width: 1px 1px 1px 0 !important;
+}
+/* Channel List */
+.scroller-1ox3I2 {
+  border-width: 1px 0 0 0 !important;
+}
+/* User Area */
+.panels-3wFtMD {
+  border-width: 1px 0 1px 0 !important;
+}
+/* Guild List */
+.scroller-3X7KbA {
+  border-width: 1px !important;
+}
+/* Channel Header */
+.container-ZMc96U.themed-Hp1KC_ {
+  border-width: 1px 1px 0 0 !important;
+}
+/* Guild Header */
+.header-3OsQeK {
+  border-width: 1px 0 0 0 !important;
+}
+/* Search Bar */
+.searchBar-zdmu7v {
+  border-width: 1px !important;
+}
+.searchBar-3TnChZ {
+  border-width: 1px 0 0 0 !important;
+}
+/* People, Game Library, Nitro */
+.peopleColumn-1wMU14,
+.container-3u6dG-,
+.scroller-9moviB {
+  border-width: 1px !important;
+}
+/* Now Playing Column */
+.nowPlayingColumn-1eCBCN {
+  border-width: 1px 1px 1px 0 !important;
+}
+
+/* Syntax Highlighing in Code Blocks*/
+code {
+  color: var(--dracula-foreground) !important;
+}
+span.hljs-built_in {
+  color: var(--dracula-purple) !important;
+}
+span.hljs-keyword {
+  color: var(--dracula-pink) !important;
+}
+span.hljs-title {
+  color: var(--dracula-cyan) !important;
+}
+span.hljs-attr {
+  color: var(--dracula-foreground) !important;
+}
+span.hljs-string {
+  color: var(--dracula-yellow) !important;
+}
+span.hljs-number {
+  color: var(--dracula-purple) !important;
+}
+span.hljs-symbol {
+  color: var(--dracula-orange) !important;
+}
+span.hljs-meta {
+  color: var(--dracula-foreground) !important;
+}
+span.hljs-meta-keyword {
+  color: var(--dracula-pink) !important;
+}
+span.hljs-meta-string {
+  color: var(--dracula-orange) !important;
+}
+
+#+end_src
+
+*** Custom Fonts
+#+begin_src css :tangle ~/.config/Ferdium/recipes/discord/user.css
+,* {
+  font-family: "sans-serif" !important;
+}
+span {
+  font-family: "sans-serif" !important;
+}
+code, code * {
+  font-family: "monospace" !important;
+}
+
+#+end_src
+
+* SSH
+#+begin_src conf :tangle ~/.ssh/config
+Host aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  User aur
+#+end_src
