@@ -1,9 +1,9 @@
 #+TITLE: Bspwm Config
-#+PROPERTY: header-args :tangle ~/.config/bspwm/bspwmrc
+#+PROPERTY: header-args :mkdirp yes
 
 * Bspwm
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc
   #!/bin/sh
 
 
