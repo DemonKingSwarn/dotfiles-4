@@ -1,5 +1,6 @@
 #+TITLE: Desktop Config
 #+PROPERTY: header-args :mkdirp yes
+#+AUTHOR: DemonKingSwarn
 
 * Profile
 ** Things

@@ -1,5 +1,6 @@
 #+TITLE: Bspwm Config
 #+PROPERTY: header-args :mkdirp yes
+#+AUTHOR: DemonKingSwarn
 
 * Bspwm
 
