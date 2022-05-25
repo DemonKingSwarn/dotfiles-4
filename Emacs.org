@@ -4,9 +4,8 @@
 
 * Config File
 
+** Basic UI Configuration
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
-;; Basic UI Configuration ------------------------------------------------------
-
 ;; You will most likely need to adjust this font size for your system!
 (defvar runemacs/default-font-size 130)
 
@@ -28,8 +27,10 @@
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
 
-;; Font Configuration ----------------------------------------------------------
+**  Font Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 (set-face-attribute 'default nil :font "JetBrainMono" :height runemacs/default-font-size)
 
@@ -38,8 +39,10 @@
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "JoyPixels" :height 135 :weight 'regular)
+#+end_src
 
-;; Package Manager Configuration -----------------------------------------------
+** Package Manager Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 ;; Initialize package sources
 (require 'package)
@@ -63,8 +66,10 @@
 (global-display-line-numbers-mode t)
 
 (use-package command-log-mode)
+#+end_src
 
-;; Ivy Configuration -----------------------------------------------------------
+** Ivy Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 (use-package ivy
   :diminish
@@ -128,8 +133,10 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
+#+end_src
 
-;; Key Binding Configuration ---------------------------------------------------
+** Key Binding Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -178,8 +185,10 @@
 
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
+#+end_src
 
-;; Projectile Configuration ----------------------------------------------------
+** Projectile Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 (use-package projectile
   :diminish projectile-mode
@@ -195,8 +204,10 @@
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
+#+end_src
 
-;; Magit Configuration ---------------------------------------------------------
+** Magit Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 (use-package magit
   :custom
@@ -214,8 +225,10 @@
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
+#+end_src
 
-;; Org Mode Configuration ------------------------------------------------------
+** Org Mode Configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
