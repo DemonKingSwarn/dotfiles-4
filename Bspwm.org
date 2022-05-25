@@ -2,7 +2,7 @@
 #+PROPERTY: header-args :mkdirp yes
 #+AUTHOR: DemonKingSwarn
 
-* Bspwm
+* Config File
 
 ** Workspaces
 #+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc
