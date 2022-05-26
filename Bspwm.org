@@ -55,4 +55,5 @@
   bspc rule -a firefox desktop=1
   bspc rule -a Virt-manager state=floating
   bspc rule -a Galculator state=floating
+  bspc rule -a Screenkey manage=off
 #+END_SRC
