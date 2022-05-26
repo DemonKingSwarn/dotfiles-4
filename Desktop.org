@@ -2844,5 +2844,5 @@ run '~/.tmux/plugins/tpm/tpm'
   XDG_MUSIC_DIR="$HOME/musics"
   XDG_PICTURES_DIR="$HOME/pix"
   XDG_VIDEOS_DIR="$HOME/vids"
-  XDG_APPLICATIONS_DIR="$HOME/Applications"
+  XDG_PUBLICSHARE_DIR="$HOME/pub"
 #+end_src
