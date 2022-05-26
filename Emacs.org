@@ -227,6 +227,83 @@
   (visual-line-mode 1))
 #+end_src
 
+** Audio player
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package bongo
+    :config
+
+    (setq bongo-infoset-from-file-name-function 'bongo-simple-infoset-from-file-name)
+    (setq bongo-default-directory "~/musics/")
+    (setq bongo-insert-whole-directory-trees t)
+
+
+    (add-to-list 'bongo-mpv-extra-arguments "--video=no")
+    (setq bongo-custom-backend-matchers
+        '((mpv local-file "webm")
+          (mpv local-file "m4a")))
+
+  (evil-define-key 'normal bongo-mode-map "e" 'bongo-append-enqueue)
+  (evil-define-key 'normal bongo-mode-map "h" 'bongo-switch-buffers)
+  (evil-define-key 'normal bongo-mode-map "m" 'bongo-mark-forward)
+  (evil-define-key '(normal visual) bongo-mode-map "u" 'bongo-unmark-forward)
+  (evil-define-key 'normal bongo-mode-map "i" 'bongo-insert-file)
+  (evil-define-key 'normal bongo-mode-map "I" 'bongo-insert-special)
+  (evil-define-key 'normal bongo-mode-map "d" 'bongo-kill)
+  (evil-define-key 'normal bongo-mode-map (kbd "SPC") 'bongo-pause/resume)
+  :bind
+  ("C-c b" . bongo))
+
+#+end_src
+
+** IRC
+#+begin_src elisp :tangle ~/.emacs.d/init.el
+(setq erc-server "irc.libera.chat"
+      erc-nick "d3m0n"
+      erc-user-full-name "demonkingswarn"
+      erc-track-shorten-start 8
+      erc-autojoin-channels-alist '(("irc.libera.chat" ))
+      erc-fill-column 120
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20
+      erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
+      erc-hide-list '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
+      erc-track-exclude-server-buffer t)
+
+(use-package erc
+  :config
+  (add-to-list 'erc-modules 'notifications))
+
+(use-package erc-hl-nicks
+  :ensure t
+  :after erc
+  :config
+  (add-to-list 'erc-modules 'hl-nicks))
+
+(use-package erc-image
+  :ensure t
+  :after erc
+  :config
+  (setq erc-image-inline-rescale 300)
+  (add-to-list 'erc-modules 'image))
+
+(use-package emojify
+  :ensure t
+  :hook (erc-mode . emojify-mode)
+  :commands emojify-mode)
+#+end_src
+
+* Web Browser
+** Elpher
+#+begin_src elisp
+
+(use-package elpher
+  :config
+  (setq elpher-default-url-type "gemini")
+  :bind
+  ("C-c g" . elpher-go))
+
+#+end_src
+
 ** Org Mode Configuration
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
 

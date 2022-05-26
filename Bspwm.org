@@ -53,4 +53,6 @@
   bspc rule -a Pavucontrol state=floating
   bspc rule -a St desktop=2
   bspc rule -a firefox desktop=1
+  bspc rule -a Virt-manager state=floating
+  bspc rule -a Galculator state=floating
 #+END_SRC

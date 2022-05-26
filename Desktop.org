@@ -2836,3 +2836,13 @@ set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 run '~/.tmux/plugins/tpm/tpm'
 #+end_src
+
+* User Dirs
+#+begin_src conf :tangle ~/.config/user-dirs.dirs
+  XDG_DOWNLOAD_DIR="$HOME/dl"
+  XDG_DOCUMENTS_DIR="$HOME/dox"
+  XDG_MUSIC_DIR="$HOME/musics"
+  XDG_PICTURES_DIR="$HOME/pix"
+  XDG_VIDEOS_DIR="$HOME/vids"
+  XDG_APPLICATIONS_DIR="$HOME/Applications"
+#+end_src
