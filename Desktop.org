@@ -341,11 +341,11 @@ color15  #fefefe
   label-focused-padding = 2
 
   label-occupied = %index%
-  label-occupied-foreground = ${colors.fg}
+  label-occupied-foreground = ${colors.fg-alt}
   label-occupied-padding = 2
 
   label-empty =
-  label-empty-foreground = ${colors.fg-alt}
+  label-empty-foreground = ${colors.bg-alt}
   label-empty-padding = 2
 
   [module/empty-space]
@@ -363,6 +363,10 @@ color15  #fefefe
   interval = 1
   exec = volume
   format = <label>
+  click-left = alacritty -e pulsemixer
+  click-right = pamixer -t
+  scroll-up = pamixer -i 2 5%
+  scroll-down = pamixer -d 2 5%
 
   [module/clock]
   type = custom/script
@@ -395,7 +399,13 @@ color15  #fefefe
 
   format-underline = ${colors.bg}
   format-background = $(colors.bg}
-  format-padding = 
+  format-padding =
+
+  [module/pacman-pkgs]
+  type = custom/script
+  exec = printf "📦 " && paru -Qn | wc -l
+  interval = 600
+  click-left = $TERMINAL -e paru -Syu
 
 #+end_src
 
