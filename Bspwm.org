@@ -8,7 +8,7 @@
 #+BEGIN_SRC sh :tangle ~/.config/bspwm/bspwmrc
   #!/bin/sh
   
-  bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+  bspc monitor -d web terminal dev games 5 6 7 8 9 10
 #+end_src
 
 ** Global Settings
@@ -47,12 +47,12 @@
 ** Rules
 #+begin_src sh :tangle ~/.config/bspwm/bspwmrc
   bspc rule -a Zathura state=tiled
-  bspc rule -a Emacs state=tiled
+  bspc rule -a Emacs desktop=^3 state=tiled
   bspc rule -a Pcmanfm state=floating follow=off focus=off
   bspc rule -a supertuxkart state=tiled
   bspc rule -a Pavucontrol state=floating
-  bspc rule -a St desktop=2
-  bspc rule -a firefox desktop=1
+  bspc rule -a St desktop=^2
+  bspc rule -a firefox desktop=^1
   bspc rule -a Virt-manager state=floating
   bspc rule -a Galculator state=floating
   bspc rule -a Screenkey manage=off

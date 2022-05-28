@@ -315,7 +315,7 @@ color15  #fefefe
 
   modules-left = bspwm
   #modules-center = xwindow
-  modules-right = nettraf empty-space pacman-pkgs empty-space volume empty-space clock empty-space internet
+  modules-right = nettraf empty-space volume empty-space clock empty-space internet
 
   tray-position = right
   tray-padding = 2
@@ -336,15 +336,15 @@ color15  #fefefe
 
   format = <label-state> <label-mode>
 
-  label-focused = %index%
+  label-focused = %name%
   label-focused-foreground = ${colors.fg}
   label-focused-padding = 2
 
-  label-occupied = %index%
+  label-occupied = %name%
   label-occupied-foreground = ${colors.fg-alt}
   label-occupied-padding = 2
 
-  label-empty =
+  label-empty = 
   label-empty-foreground = ${colors.bg-alt}
   label-empty-padding = 2
 
@@ -384,7 +384,7 @@ color15  #fefefe
   type = custom/script
   exec = forecast
   label = "%output%"
-  click-left = $TERMINAL -e w3m wttr.in/Ranchi &
+  click-left = $TERMINAL -e curl "wttr.in/?1n"
   interval = 1800
 
   [module/kbselect]
@@ -403,8 +403,8 @@ color15  #fefefe
 
   [module/pacman-pkgs]
   type = custom/script
-  exec = printf "📦 " && paru -Qn | wc -l
-  interval = 360
+  exec = printf "📦 " && paru -Qu | wc -l
+  interval = 1
   click-left = alacritty -e paru -Syu
 
 #+end_src
@@ -2602,7 +2602,7 @@ feh -. -B #2E3440 -N -^ "[%u/%l] %n (%wx%h) - feh"
 key=D
 active=yes
 client_id=737663962677510245
-binary_path=discord
+binary_path=$HOME/.config/mpv/discord
 socket_path=/tmp/mpvsocket
 use_static_socket_path=yes
 autohide_threshold=0
