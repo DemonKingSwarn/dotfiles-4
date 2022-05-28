@@ -315,7 +315,7 @@ color15  #fefefe
 
   modules-left = bspwm
   #modules-center = xwindow
-  modules-right = nettraf empty-space volume empty-space clock empty-space internet
+  modules-right = nettraf empty-space pacman-pkgs empty-space volume empty-space clock empty-space internet
 
   tray-position = right
   tray-padding = 2
@@ -404,8 +404,8 @@ color15  #fefefe
   [module/pacman-pkgs]
   type = custom/script
   exec = printf "📦 " && paru -Qn | wc -l
-  interval = 600
-  click-left = $TERMINAL -e paru -Syu
+  interval = 360
+  click-left = alacritty -e paru -Syu
 
 #+end_src
 
