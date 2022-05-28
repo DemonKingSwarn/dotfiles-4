@@ -337,15 +337,15 @@ color15  #fefefe
   format = <label-state> <label-mode>
 
   label-focused = %index%
-  label-focused-foreground = ${colors.shade-5}
+  label-focused-foreground = ${colors.fg}
   label-focused-padding = 2
 
   label-occupied = %index%
-  label-occupied-foreground = ${colors.shade-3}
+  label-occupied-foreground = ${colors.fg}
   label-occupied-padding = 2
 
   label-empty =
-  label-empty-foreground = ${colors.shade-1}
+  label-empty-foreground = ${colors.fg-alt}
   label-empty-padding = 2
 
   [module/empty-space]
@@ -376,11 +376,12 @@ color15  #fefefe
   exec = internet
   format = <label>
 
-  [module/dbar]
+  [module/weather]
   type = custom/script
-  interval = 1
-  exec = dbar
-  format = <label>
+  exec = forecast
+  label = "%output%"
+  click-left = $TERMINAL -e w3m wttr.in/Ranchi &
+  interval = 1800
 
   [module/kbselect]
   type = custom/script
@@ -391,6 +392,10 @@ color15  #fefefe
   [module/xwindow]
   type = internal/xwindow
   label = %title:0:30:...%
+
+  format-underline = ${colors.bg}
+  format-background = $(colors.bg}
+  format-padding = 
 
 #+end_src
 
