@@ -313,7 +313,7 @@ color15  #fefefe
   font-2 = "JetBrainsMono Nerd Font:size=19;5"
   font-3 = "Noto Color Emoji:pixelsize=16:style=Regular:scale=10;2"
 
-  modules-left = bspwm
+  modules-left = bspwm xwindow
   #modules-center = xwindow
   modules-right = nettraf empty-space volume empty-space clock empty-space internet
 
@@ -395,7 +395,7 @@ color15  #fefefe
 
   [module/xwindow]
   type = internal/xwindow
-  label = %title:0:30:...%
+  label = %title:0:90:...%
 
   format-underline = ${colors.bg}
   format-background = $(colors.bg}
@@ -2857,14 +2857,4 @@ set -g @plugin 'tmux-plugins/tmux-pain-control'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 run '~/.tmux/plugins/tpm/tpm'
-#+end_src
-
-* User Dirs
-#+begin_src conf :tangle ~/.config/user-dirs.dirs
-  XDG_DOWNLOAD_DIR="$HOME/dl"
-  XDG_DOCUMENTS_DIR="$HOME/dox"
-  XDG_MUSIC_DIR="$HOME/musics"
-  XDG_PICTURES_DIR="$HOME/pix"
-  XDG_VIDEOS_DIR="$HOME/vids"
-  XDG_PUBLICSHARE_DIR="$HOME/pub"
 #+end_src
