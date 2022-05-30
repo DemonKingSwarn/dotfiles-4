@@ -255,6 +255,12 @@
 
 #+end_src
 
+** Discord RPC
+#+begin_src elisp :tangle ~/.emacs.d/init.el
+  (require 'elcord)
+  (elcord-mode)
+#+end_src
+
 ** IRC
 #+begin_src elisp :tangle ~/.emacs.d/init.el
 (setq erc-server "irc.libera.chat"
